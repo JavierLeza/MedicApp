@@ -11,7 +11,7 @@ public class MedicDbHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME = "medic.db";
 
     //Versión de la BD.
-    static final int DATABASE_VERSION = 2;
+    static final int DATABASE_VERSION = 3;
 
     public MedicDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -70,22 +70,22 @@ public class MedicDbHelper extends SQLiteOpenHelper {
         String SQL_CREATE_PATIENTS_USERS_TABLE = "CREATE TABLE "
                 + MedicContract.PatientUserEntry.TABLE_NAME + " ("
                 + MedicContract.PatientUserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + MedicContract.PatientUserEntry.COLUMN_DNI + " TEXT NOT NULL , "
-                + MedicContract.PatientUserEntry.COLUMN_USER + " INTEGER NOT NULL, "
+                + MedicContract.PatientUserEntry.COLUMN_PATIENT_DNI + " TEXT NOT NULL , "
+                + MedicContract.PatientUserEntry.COLUMN_USER_ID + " INTEGER NOT NULL, "
                 + "UNIQUE ("
-                + MedicContract.PatientUserEntry.COLUMN_DNI
+                + MedicContract.PatientUserEntry.COLUMN_PATIENT_DNI
                 + ", "
-                + MedicContract.PatientUserEntry.COLUMN_USER
+                + MedicContract.PatientUserEntry.COLUMN_USER_ID
                 + "),"
                 + " FOREIGN KEY ("
-                + MedicContract.PatientUserEntry.COLUMN_DNI
+                + MedicContract.PatientUserEntry.COLUMN_PATIENT_DNI
                 + ") REFERENCES "
                 + MedicContract.PatientEntry.TABLE_NAME
                 + " ( "
                 + MedicContract.PatientEntry.COLUMN_DNI
                 + "), "
                 + " FOREIGN KEY ("
-                + MedicContract.PatientUserEntry.COLUMN_USER
+                + MedicContract.PatientUserEntry.COLUMN_USER_ID
                 + ") REFERENCES "
                 + MedicContract.UserEntry.TABLE_NAME
                 + " ( "
@@ -125,12 +125,52 @@ public class MedicDbHelper extends SQLiteOpenHelper {
                 + ") "
                 + "); ";
 
+        String SQL_CREATE_LOG_TABLE = "CREATE TABLE "
+                + MedicContract.LogEntry.TABLE_NAME + " ("
+                + MedicContract.LogEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + MedicContract.LogEntry.COLUMN_ADMIN_ID + " INTEGER , "
+                + MedicContract.LogEntry.COLUMN_USER_ID + " INTEGER , "
+                + MedicContract.LogEntry.COLUMN_PATIENT_DNI + " TEXT , "
+                + MedicContract.LogEntry.COLUMN_SYMPTOM_ID + " INTEGER , "
+                + MedicContract.LogEntry.COLUMN_DESCRIPTION + " TEXT NOT NULL, "
+                + MedicContract.LogEntry.COLUMN_TIMESTAMP + " DATE DEFAULT (date('now','localtime')),  "
+                + " FOREIGN KEY ("
+                + MedicContract.LogEntry.COLUMN_USER_ID
+                + ") REFERENCES "
+                + MedicContract.UserEntry.TABLE_NAME
+                + " ( "
+                + MedicContract.UserEntry._ID
+                + "), "
+                + " FOREIGN KEY ("
+                + MedicContract.LogEntry.COLUMN_PATIENT_DNI
+                + ") REFERENCES "
+                + MedicContract.PatientEntry.TABLE_NAME
+                + " ( "
+                + MedicContract.PatientEntry.COLUMN_DNI
+                + "), "
+                + " FOREIGN KEY ("
+                + MedicContract.LogEntry.COLUMN_SYMPTOM_ID
+                + ") REFERENCES "
+                + MedicContract.SymptomEntry.TABLE_NAME
+                + " ( "
+                + MedicContract.SymptomEntry._ID
+                + "), "
+                + " FOREIGN KEY ("
+                + MedicContract.LogEntry.COLUMN_ADMIN_ID
+                + ") REFERENCES "
+                + MedicContract.AdminEntry.TABLE_NAME
+                + " ( "
+                + MedicContract.AdminEntry._ID
+                + ") "
+                + "); ";
+
         sqLiteDatabase.execSQL(SQL_CREATE_USER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_ADMIN_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_PATIENTS_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_SYMPTOMS_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_PATIENTS_USERS_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_FIRST_ADMIN);
+        sqLiteDatabase.execSQL(SQL_CREATE_LOG_TABLE);
 
 
     }
@@ -139,6 +179,10 @@ public class MedicDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MedicContract.UserEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MedicContract.AdminEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MedicContract.PatientEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MedicContract.SymptomEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MedicContract.PatientUserEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MedicContract.LogEntry.TABLE_NAME);
 
         onCreate(sqLiteDatabase);
     }

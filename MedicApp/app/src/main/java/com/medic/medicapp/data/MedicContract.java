@@ -51,8 +51,8 @@ public class MedicContract {
         public static final String TABLE_NAME = "patientUser";
 
         //Columnas de la tabla
-        public static final String COLUMN_DNI = "dni"; //dni del paciente
-        public static final String COLUMN_USER = "user"; //id del médico
+        public static final String COLUMN_PATIENT_DNI = "dni"; //dni del paciente
+        public static final String COLUMN_USER_ID = "user"; //id del médico
     }
 
 
@@ -67,5 +67,18 @@ public class MedicContract {
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_PATIENT = "patient";
         public static final String COLUMN_USER = "user";
+    }
+
+    final static public class LogEntry implements BaseColumns{
+        //Nombre de la tabla
+        public static final String TABLE_NAME = "log";
+
+        //Columnas de la tabla
+        public static final String COLUMN_ADMIN_ID = "adminID";
+        public static final String COLUMN_USER_ID = "userID";
+        public static final String COLUMN_PATIENT_DNI = "patientDNI";
+        public static final String COLUMN_SYMPTOM_ID = "symptomID";
+        public static final String COLUMN_TIMESTAMP = "timestamp";
+        public static final String COLUMN_DESCRIPTION = "description";
     }
 }
