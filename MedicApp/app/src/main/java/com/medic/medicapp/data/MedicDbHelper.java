@@ -45,8 +45,19 @@ public class MedicDbHelper extends SQLiteOpenHelper {
                 + "); ";
 
 
+        String SQL_CREATE_FIRST_ADMIN = "INSERT INTO "
+                + MedicContract.AdminEntry.TABLE_NAME
+                + " ("
+                + MedicContract.AdminEntry.COLUMN_ADMIN_NAME + ", "
+                + MedicContract.AdminEntry.COLUMN_PASSWORD + ") "
+                + " VALUES ("
+                + "'" + MedicContract.AdminEntry.FIRST_ADMIN_NAME + "' ,"
+                + "'" + MedicContract.AdminEntry.FIRST_ADMIN_PASSWORD + "');";
+
         sqLiteDatabase.execSQL(SQL_CREATE_USER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_ADMIN_TABLE);
+
+        sqLiteDatabase.execSQL(SQL_CREATE_FIRST_ADMIN);
 
 
     }
