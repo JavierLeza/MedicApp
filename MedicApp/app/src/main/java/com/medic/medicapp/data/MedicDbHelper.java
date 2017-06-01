@@ -11,7 +11,7 @@ public class MedicDbHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME = "medic.db";
 
     //Versión de la BD.
-    static final int DATABASE_VERSION = 1;
+    static final int DATABASE_VERSION = 2;
 
     public MedicDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -54,9 +54,82 @@ public class MedicDbHelper extends SQLiteOpenHelper {
                 + "'" + MedicContract.AdminEntry.FIRST_ADMIN_NAME + "' ,"
                 + "'" + MedicContract.AdminEntry.FIRST_ADMIN_PASSWORD + "');";
 
+        String SQL_CREATE_PATIENTS_TABLE = "CREATE TABLE "
+                + MedicContract.PatientEntry.TABLE_NAME + " ("
+                + MedicContract.PatientEntry.COLUMN_DNI + " TEXT PRIMARY KEY , "
+                + MedicContract.PatientEntry.COLUMN_PATIENT_NAME + " TEXT NOT NULL, "
+                + MedicContract.PatientEntry.COLUMN_SEX + " TEXT NOT NULL, "
+                + MedicContract.PatientEntry.COLUMN_ADMISSION_DATE + " DATE DEFAULT (date('now','localtime')), "
+                + MedicContract.PatientEntry.COLUMN_DISCHARGE_DATE + " DATE , "
+                + MedicContract.PatientEntry.COLUMN_ADDRESS + " TEXT NOT NULL , "
+                + MedicContract.PatientEntry.COLUMN_SOCIAL_NUMBER + " INTEGER NOT NULL, "
+                + MedicContract.PatientEntry.COLUMN_STATE + " BOOLEAN NOT NULL, "
+                + MedicContract.PatientEntry.COLUMN_BIRTH_DATE + " DATE  "
+                + "); ";
+
+        String SQL_CREATE_PATIENTS_USERS_TABLE = "CREATE TABLE "
+                + MedicContract.PatientUserEntry.TABLE_NAME + " ("
+                + MedicContract.PatientUserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + MedicContract.PatientUserEntry.COLUMN_DNI + " TEXT NOT NULL , "
+                + MedicContract.PatientUserEntry.COLUMN_USER + " INTEGER NOT NULL, "
+                + "UNIQUE ("
+                + MedicContract.PatientUserEntry.COLUMN_DNI
+                + ", "
+                + MedicContract.PatientUserEntry.COLUMN_USER
+                + "),"
+                + " FOREIGN KEY ("
+                + MedicContract.PatientUserEntry.COLUMN_DNI
+                + ") REFERENCES "
+                + MedicContract.PatientEntry.TABLE_NAME
+                + " ( "
+                + MedicContract.PatientEntry.COLUMN_DNI
+                + "), "
+                + " FOREIGN KEY ("
+                + MedicContract.PatientUserEntry.COLUMN_USER
+                + ") REFERENCES "
+                + MedicContract.UserEntry.TABLE_NAME
+                + " ( "
+                + MedicContract.UserEntry._ID
+                + ") "
+                + "); ";
+
+        String SQL_CREATE_SYMPTOMS_TABLE = "CREATE TABLE "
+                + MedicContract.SymptomEntry.TABLE_NAME + " ("
+                + MedicContract.SymptomEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + MedicContract.SymptomEntry.COLUMN_SYMPTOM + " TEXT NOT NULL , "
+                + MedicContract.SymptomEntry.COLUMN_STATE + " BOOLEAN NOT NULL DEFAULT TRUE, "
+                + MedicContract.SymptomEntry.COLUMN_PRIORITY + " TEXT, "
+                + MedicContract.SymptomEntry.COLUMN_PATIENT + " TEXT NOT NULL, " //DNI del paciente
+                + MedicContract.SymptomEntry.COLUMN_USER + " INTEGER NOT NULL,"
+                + MedicContract.SymptomEntry.COLUMN_DESCRIPTION + " TEXT, "
+                + "UNIQUE ("
+                + MedicContract.SymptomEntry.COLUMN_SYMPTOM
+                + ", "
+                + MedicContract.SymptomEntry.COLUMN_PATIENT
+                + ", "
+                + MedicContract.SymptomEntry.COLUMN_USER
+                + "),"
+                + " FOREIGN KEY ("
+                + MedicContract.SymptomEntry.COLUMN_PATIENT
+                + ") REFERENCES "
+                + MedicContract.PatientEntry.TABLE_NAME
+                + " ( "
+                + MedicContract.PatientEntry.COLUMN_DNI
+                + "), "
+                + " FOREIGN KEY ("
+                + MedicContract.SymptomEntry.COLUMN_USER
+                + ") REFERENCES "
+                + MedicContract.UserEntry.TABLE_NAME
+                + " ( "
+                + MedicContract.UserEntry._ID
+                + ") "
+                + "); ";
+
         sqLiteDatabase.execSQL(SQL_CREATE_USER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_ADMIN_TABLE);
-
+        sqLiteDatabase.execSQL(SQL_CREATE_PATIENTS_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_SYMPTOMS_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_PATIENTS_USERS_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_FIRST_ADMIN);
 
 
