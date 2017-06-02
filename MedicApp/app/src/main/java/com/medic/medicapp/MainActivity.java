@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static SQLiteDatabase mDb;
     private Button mLogInButton;
+    public static int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
