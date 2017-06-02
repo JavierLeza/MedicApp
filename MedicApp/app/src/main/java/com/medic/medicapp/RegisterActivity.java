@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
             Class destinationActivity = PatientActivity.class;
 
             // creamos un intento para iniciar RegisterActivity
-            Intent intent = new Intent(context,destinationActivity);//TEST
+            Intent intent = new Intent(context,destinationActivity);
 
             intent.putExtra(Intent.EXTRA_TEXT, mNewUserEditText.getText().toString());
 
