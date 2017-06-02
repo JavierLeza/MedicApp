@@ -1,5 +1,6 @@
 package com.medic.medicapp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -41,28 +42,26 @@ public class LogInActivity extends AppCompatActivity {
             id = getUserId(mUserNameEditText.getText().toString());
 
             //El primer parámetro es el context y el segundo la siguiente actividad que se abrirá
-            /*////////Intent intent = new Intent(LogInActivity.this,PatientActivity.class);
+            Intent intent = new Intent(LogInActivity.this,PatientActivity.class);
 
             intent.putExtra(Intent.EXTRA_TEXT, mUserNameEditText.getText().toString());
 
             // Se inicia la pantalla de las listas
             startActivity(intent);
-            *///////////////////
 
             //Para los admins
         }else if(checkAdmin(mUserNameEditText.getText().toString(), mPasswordEditText.getText().toString())){
             Toast.makeText(getBaseContext(), R.string.login_ok, Toast.LENGTH_LONG).show();
 
             id = getAdminId(mUserNameEditText.getText().toString());
-            /*///////////////////////
             //El primer parámetro es el context y el segundo la siguiente actividad que se abrirá
-            Intent intent = new Intent(LogInActivity.this,UsersListActivity.class);
 
-            intent.putExtra(Intent.EXTRA_TEXT, mUserNameEditText.getText().toString());
+            ///////////Intent intent = new Intent(LogInActivity.this,UsersListActivity.class);
+
+            ////////intent.putExtra(Intent.EXTRA_TEXT, mUserNameEditText.getText().toString());
 
             // Se inicia la pantalla de los usuarios
-            startActivity(intent);
-            *//////////////////////
+            ////////startActivity(intent);
 
         }else{
             Toast.makeText(getBaseContext(), R.string.login_error, Toast.LENGTH_LONG).show();

@@ -2,6 +2,7 @@ package com.medic.medicapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,15 +44,15 @@ public class RegisterActivity extends AppCompatActivity {
             Context context = RegisterActivity.this;
 
             //Esta es la siguiente "actividad" que será llamada
-            //////////////////////////Class destinationActivity = PatientActivity.class;
+            Class destinationActivity = PatientActivity.class;
 
             // creamos un intento para iniciar RegisterActivity
-            //////////////Intent intent = new Intent(context,destinationActivity);
+            Intent intent = new Intent(context,destinationActivity);
 
-            //intent.putExtra(Intent.EXTRA_TEXT, mNewUserEditText.getText().toString());
+            intent.putExtra(Intent.EXTRA_TEXT, mNewUserEditText.getText().toString());
 
-            // Se inicia la pantalla de las listas
-            ///startActivity(intent);
+            // Se inicia la pantalla de los pacientes
+            startActivity(intent);
 
 
         }else{
