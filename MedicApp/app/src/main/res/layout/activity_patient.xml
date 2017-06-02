@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.medic.medicapp.PatientActivity">
+    android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <!-- RecyclerView es el que muestra la lista de listas -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewLists"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"/>
+
+    <!-- Este es el botón con el que se añaden nuevas listas -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_new_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:tint="@android:color/white"/>
+
+</FrameLayout>
