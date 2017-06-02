@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">MedicApp</string>
+    <string name="register_button">Registrarse</string>
+    <string name="log_in_button">Acceder</string>
+    <string name="welcome">Bienvenido!</string>
+    <string name="user_name_hint">Nombre de Usuario</string>
+    <string name="user_password_hint">Contraseña</string>
+    <string name="login_user_button_text">Acceder</string>
+    <string name="login_ok">Log In Correcto, accediendo</string>
+    <string name="login_error">El nombre de usuario y/o la contraseña son incorrectos, vuelva a intentarlo.</string>
+    <string name="add_user_button_text">Registrarse</string>
+    <string name="register_ok">Se ha registrado el médico correctamente.</string>
+    <string name="register_error">El nombre de usuario elegido ya está cogido, inténtelo de nuevo!</string>
 </resources>
