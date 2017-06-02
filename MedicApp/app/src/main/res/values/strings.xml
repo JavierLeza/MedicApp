@@ -8,4 +8,7 @@
     <string name="login_user_button_text">Acceder</string>
     <string name="login_ok">Log In Correcto, accediendo</string>
     <string name="login_error">El nombre de usuario y/o la contraseña son incorrectos, vuelva a intentarlo.</string>
+    <string name="add_user_button_text">Registrarse</string>
+    <string name="register_ok">Se ha registrado el médico correctamente.</string>
+    <string name="register_error">El nombre de usuario elegido ya está cogido, inténtelo de nuevo!</string>
 </resources>
