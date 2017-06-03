@@ -20,7 +20,10 @@
         <activity android:name=".LogInActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".AddPatientActivity" />
-        <activity android:name=".PatientSymptomsActivity"></activity>
+        <activity
+            android:name=".PatientSymptomsActivity"
+            android:label="@string/title_activity_patient_symptoms"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

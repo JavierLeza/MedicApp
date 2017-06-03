@@ -22,4 +22,6 @@
     <string name="add_patient_button">AÑADIR PACIENTE</string>
     <string name="add_admission_date">Fecha de ingreso</string>
     <string name="add_patient_error">Debe rellenar todos los campos marcados con *</string>
+    <string name="title_activity_patient_symptoms">PatientSymptomsActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>

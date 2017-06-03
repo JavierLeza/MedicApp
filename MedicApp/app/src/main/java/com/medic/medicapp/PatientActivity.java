@@ -163,7 +163,6 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
         Intent intent = new Intent(PatientActivity.this,PatientSymptomsActivity.class);
 
         intent.putExtra(Intent.EXTRA_TEXT, patientDni);
-        intent.putExtra("patientDni" , String.valueOf(patientDni));
 
         // Se inicia la pantalla del detalle de la lista junto con sus elementos
         startActivity(intent);
