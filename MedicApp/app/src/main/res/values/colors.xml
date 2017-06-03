@@ -3,4 +3,13 @@
     <color name="colorPrimary">#33bbff</color>
     <color name="colorPrimaryDark">#00aaff</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- Colores para la gravedad -->
+    <color name="materialRed">#E74C3C</color>
+    <color name="materialOrange">#E67E22</color>
+    <color name="materialYellow">#F1C40F</color>
+
+    <!-- Colores para el sexo del paciente -->
+    <color name="female">#FFC0CB</color>
+    <color name="male">#37a2b2</color>
 </resources>

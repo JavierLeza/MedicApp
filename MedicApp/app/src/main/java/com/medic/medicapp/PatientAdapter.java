@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.medic.medicapp.data.MedicContract;
 
+import static com.medic.medicapp.MainActivity.mDb;
+
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientViewHolder> {
 
     // cursor para mostrar los pacientes
@@ -18,7 +20,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
     private Context mContext;
 
     /**
-     * Contect es para la actividad que se llama
+     * Context es para la actividad que se llama
      * cursor es un cursor a la BD para los pacientes que se mostrarán
      */
     public PatientAdapter(Context context, Cursor cursor) {
@@ -49,12 +51,29 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
         mCursor.moveToPosition(position);
 
         // Actualizar el view holder con la información que se necesita mostrar
-        String patientName = mCursor.getString(mCursor.getColumnIndex(MedicContract.PatientEntry.COLUMN_PATIENT_NAME));
-        final int id = mCursor.getInt(mCursor.getColumnIndex(MedicContract.PatientEntry.COLUMN_DNI));
+        String patientDni = mCursor.getString(mCursor.getColumnIndex(MedicContract.PatientUserEntry.COLUMN_PATIENT_DNI));
+
+        Cursor cursor;
+
+        cursor = mDb.query(
+                MedicContract.PatientEntry.TABLE_NAME,
+                null,
+                MedicContract.PatientEntry.COLUMN_DNI + " = '" + patientDni + "'",
+                null,
+                null,
+                null,
+                null);
+
+        String patientName = "";
+        if(cursor != null && cursor.moveToFirst()){
+            patientName= cursor.getString(cursor.getColumnIndex(MedicContract.PatientEntry.COLUMN_PATIENT_NAME));
+            cursor.close();
+        }
+        final int id = mCursor.getInt(mCursor.getColumnIndex(MedicContract.PatientUserEntry._ID));
 
         // Mostrar el nombre de la lista
         holder.itemView.setTag(id);
-        holder.listNameTextView.setText(patientName);
+        holder.listNameTextView.setText("Nombre: " + patientName  + " - DNI: " +patientDni );
 
     }
 
@@ -82,7 +101,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
      */
     class PatientViewHolder extends RecyclerView.ViewHolder {
 
-        // Nombre de la lista
+        // Nombre del paciente
         TextView listNameTextView;
 
 

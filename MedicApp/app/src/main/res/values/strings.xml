@@ -11,4 +11,15 @@
     <string name="add_user_button_text">Registrarse</string>
     <string name="register_ok">Se ha registrado el médico correctamente.</string>
     <string name="register_error">El nombre de usuario elegido ya está cogido, inténtelo de nuevo!</string>
+    <string name="add_patient_name">Nombre y apellidos *</string>
+    <string name="add_dni">DNI *</string>
+    <string name="add_sex">Sexo *</string>
+    <string name="female">MUJER</string>
+    <string name="male">HOMBRE</string>
+    <string name="add_address">Dirección *</string>
+    <string name="add_birthdate">Fecha de nacimiento *</string>
+    <string name="add_ss_number">Número de la Seguridad Social *</string>
+    <string name="add_patient_button">AÑADIR PACIENTE</string>
+    <string name="add_admission_date">Fecha de ingreso</string>
+    <string name="add_patient_error">Debe rellenar todos los campos marcados con *</string>
 </resources>

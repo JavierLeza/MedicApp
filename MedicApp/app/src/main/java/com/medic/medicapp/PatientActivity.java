@@ -22,6 +22,9 @@ import android.widget.Toast;
 
 import com.medic.medicapp.data.MedicContract;
 
+import static com.medic.medicapp.MainActivity.id;
+import static com.medic.medicapp.MainActivity.mDb;
+
 
 public class PatientActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -49,17 +52,19 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
             @Override
             public void onClick(View view) {
                 //Al hacer click podemos añadir un nuevo paciente
-                /////////////////////Intent addListIntent = new Intent(PatientActivity.this, AddPatientActivity.class);
-                ////////////////////startActivity(addListIntent);
+                Intent addPatientIntent = new Intent(PatientActivity.this, AddPatientActivity.class);
+                startActivity(addPatientIntent);
             }
         });
 
-        mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerViewLists);
+        mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerViewPatients);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
 
-        Cursor cursor = getUserLists();
+        Cursor cursor = getUserPatients();
+        Toast.makeText(getBaseContext(), "numero de pacientes del medico: " + cursor.getCount(), Toast.LENGTH_LONG).show();
+
         mAdapter = new PatientAdapter(this, cursor);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -67,11 +72,16 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
         getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
     }
 
-    private Cursor getUserLists(){
-//        return mDb.query(
-//            //TODO: IMPLEMENTAR QUERY
-//        );
-        return null; //QUITAR DESPUES DE HACER EL TODO
+    private Cursor getUserPatients(){
+        return mDb.query(
+                MedicContract.PatientUserEntry.TABLE_NAME,
+                null,
+                MedicContract.PatientUserEntry.COLUMN_USER_ID+ " = '" + id + "'",
+                null,
+                null,
+                null,
+                null
+        );
     }
 
 
@@ -103,7 +113,7 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
                 // Query and load all task data in the background; sort by priority
 
                 try {
-                    return getUserLists();
+                    return getUserPatients();
 
                 } catch (Exception e) {
                     Log.e(TAG, "Failed to asynchronously load data.");
@@ -142,7 +152,7 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
     }
 
 
-    public void listDetail(View view) {
-        //IMPLEMENTAR
+    public void patientDetail(View view) {
+        //TODO:IMPLEMENTAR
     }
 }
