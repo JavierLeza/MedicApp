@@ -153,6 +153,28 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
 
 
     public void patientDetail(View view) {
-        //TODO:IMPLEMENTAR
+        TextView tv = (TextView) view;
+
+        String text = tv.getText().toString();
+        String patientDni = getPatientDni(text);
+
+        Toast.makeText(getBaseContext(),"Se ha pulsado el paciente con DNI:" + patientDni, Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(PatientActivity.this,PatientSymptomsActivity.class);
+
+        intent.putExtra(Intent.EXTRA_TEXT, patientDni);
+        intent.putExtra("patientDni" , String.valueOf(patientDni));
+
+        // Se inicia la pantalla del detalle de la lista junto con sus elementos
+        startActivity(intent);
+    }
+
+    private String getPatientDni(String text) {
+        String[] parts = text.split("DNI: ");
+        String name = parts[0]; // Nombre
+        String dni = parts[1]; // Dni
+
+        return dni;
+
     }
 }

@@ -18,7 +18,7 @@
         android:textColor="@android:color/primary_text_light"
         style="@style/TextAppearance.AppCompat.Medium"
         android:padding="16dp"
-        android:onClick="listDetail"
+        android:onClick="patientDetail"
         android:clickable="true"/>
 
 
