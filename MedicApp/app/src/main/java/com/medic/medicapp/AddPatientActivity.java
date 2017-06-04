@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 import com.medic.medicapp.data.MedicContract;
 
@@ -47,7 +51,9 @@ public class AddPatientActivity extends AppCompatActivity {
 
         String admission;
         if (admissionDay.length() == 0 || admissionMonth.length() == 0 || admissionYear.length() == 0) {
-            admission = null; // Fecha por defecto
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            Date date = new Date();
+            admission = dateFormat.format(date);
         }else{
             admission = admissionYear + "-" + admissionMonth + "-" + admissionDay;
         }
@@ -117,7 +123,7 @@ public class AddPatientActivity extends AppCompatActivity {
     }
 
 
-    public void onPrioritySelected(View view) {
+    public void onSexSelected(View view) {
         if (((RadioButton) findViewById(R.id.radButton1)).isChecked()) {
             mSex = "F"; //Sexo fememino
         } else if (((RadioButton) findViewById(R.id.radButton2)).isChecked()) {

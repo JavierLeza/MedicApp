@@ -86,7 +86,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
             return null; // porque no ha cambiado nada
         }
         Cursor temp = mCursor;
-        this.mCursor = newCursor; // nuevo cursor asignador¡
+        this.mCursor = newCursor; // nuevo cursor asignado
 
         //comprobar si el cursor es valido, y si sí, actualizarlo
         if (newCursor != null) {

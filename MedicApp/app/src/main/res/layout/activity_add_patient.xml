@@ -84,7 +84,7 @@
                 android:id="@+id/radButton1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onPrioritySelected"
+                android:onClick="onSexSelected"
                 android:layout_weight="1"
                 android:theme="@style/WhiteRadioButton"/>
 
@@ -92,7 +92,7 @@
                 android:id="@+id/radButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onPrioritySelected"
+                android:onClick="onSexSelected"
                 android:layout_weight="1"
                 android:theme="@style/WhiteRadioButton"/>
 

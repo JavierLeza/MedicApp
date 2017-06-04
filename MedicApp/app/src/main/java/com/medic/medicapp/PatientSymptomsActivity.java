@@ -58,12 +58,11 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
         fab_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 03/06/2017
-//                Intent intent = new Intent(PatientSymptomsActivity.this, EditPatientActivity.class);
-//
-//                intent.putExtra(Intent.EXTRA_TEXT, String.valueOf(patientDni));
-//
-//                startActivityForResult(intent, 1);
+                Intent intent = new Intent(PatientSymptomsActivity.this, EditPatientActivity.class);
+
+                intent.putExtra(Intent.EXTRA_TEXT, String.valueOf(patientDni));
+
+                startActivityForResult(intent, 1);
             }
 
 

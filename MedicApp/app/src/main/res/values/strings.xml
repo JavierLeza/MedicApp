@@ -36,4 +36,21 @@
     <string name="state_active">Activo</string>
     <string name="state_inactive">No activo</string>
     <string name="add_symptom_error">El síntoma ya exise</string>
+    <string name="pacient_name">Nombre y apellidos:</string>
+    <string name="pacient_dni">DNI:</string>
+    <string name="edit_sex">Sex:</string>
+    <string name="pacient_ss">Número de la Seg. Social: </string>
+    <string name="pacient_address">Dirección:</string>
+    <string name="pacient_birthdate">Fecha de nacimiento:</string>
+    <string name="edit_patient_name">Nuevo nombre y apellidos</string>
+    <string name="edit_dni">Nuevo DNI</string>
+    <string name="edit_ss_number">Nuevo número de la Seguridad Social</string>
+    <string name="edit_address">Nueva dirección</string>
+    <string name="dd">DD</string>
+    <string name="mm">MM</string>
+    <string name="yyyy">YYYY</string>
+    <string name="edit_birthdate">Nueva fecha de nacimiento</string>
+    <string name="pacient_admission_date">Fecha de ingreso:</string>
+    <string name="edit_admission_date">Nueva fecha de ingreso</string>
+    <string name="save_changes">GUARDAR CAMBIOS</string>
 </resources>
