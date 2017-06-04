@@ -71,4 +71,6 @@
     <string name="patient_number">Número de pacientes: </string>
     <string name="symptom_number">Número de síntomas activos: </string>
     <string name="member_since">Miembro desde: </string>
+    <string name="delete_account">Borrar mi cuenta</string>
+    <string name="delete_account_text">¿Está seguro de que quiere borrar su cuenta? Se perderá toda la información que haya guardado de sus pacientes. \nEsta acción no se puede deshacer.</string>
 </resources>

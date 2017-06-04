@@ -1,14 +1,18 @@
 package com.medic.medicapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medic.medicapp.data.MedicContract;
 
@@ -128,5 +132,43 @@ public class UserAccountActivity extends AppCompatActivity {
 
     }
 
-    
+    private void showPopup() {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(UserAccountActivity.this, R.style.MyDialogTheme);
+        } else {
+            builder = new AlertDialog.Builder(UserAccountActivity.this);
+        }
+        builder.setTitle(R.string.delete_account)
+                .setMessage(R.string.delete_account_text)
+                .setPositiveButton(R.string.accept_delete, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        deleteAccount();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(R.mipmap.heartbeat)
+                .show();
+    }
+
+    public void deleteAccount(){
+
+        String whereClausePatients = MedicContract.PatientUserEntry.COLUMN_USER_ID + " = " + id;
+        mDb.delete(MedicContract.PatientUserEntry.TABLE_NAME, whereClausePatients ,null);
+
+        String whereClauseSymptom = MedicContract.SymptomEntry.COLUMN_USER + " = " + id;
+        mDb.delete(MedicContract.SymptomEntry.TABLE_NAME, whereClauseSymptom ,null);
+
+        String whereClauseUser = MedicContract.UserEntry._ID + " = " + id;
+        mDb.delete(MedicContract.UserEntry.TABLE_NAME, whereClauseUser ,null);
+
+
+        Toast.makeText(getBaseContext(),"El usuario \"" + userName + "\" ha sido borrado con éxito.",  Toast.LENGTH_LONG).show();
+        startActivity(new Intent(UserAccountActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
+    }
 }
