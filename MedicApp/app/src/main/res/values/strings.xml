@@ -60,4 +60,7 @@
     <string name="title_activity_symptom_details">SymptomDetailsActivity</string>
     <string name="show_symptom_state">Estado</string>
     <string name="show_symptom_priority">Gravedad</string>
+    <string name="delete_symptom">Borrar síntoma</string>
+    <string name="delete_symptom_text">¿Estás seguro de que quieres eliminar este síntoma?</string>
+    <string name="accept_delete">Borrar</string>
 </resources>

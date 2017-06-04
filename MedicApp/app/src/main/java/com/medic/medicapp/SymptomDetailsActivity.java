@@ -1,15 +1,19 @@
 package com.medic.medicapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medic.medicapp.data.MedicContract;
 
@@ -48,11 +52,11 @@ public class SymptomDetailsActivity extends AppCompatActivity {
 
         });
 
-        FloatingActionButton fab_delete_user = (FloatingActionButton) findViewById(R.id.fab_delete);
-        fab_delete_user.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab_delete_symptom = (FloatingActionButton) findViewById(R.id.fab_delete);
+        fab_delete_symptom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                showPopup();
             }
         });
 
@@ -90,6 +94,29 @@ public class SymptomDetailsActivity extends AppCompatActivity {
         }
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+
+
+            if(data.hasExtra(Intent.EXTRA_TEXT)){
+                symptomID = Integer.parseInt(data.getStringExtra(Intent.EXTRA_TEXT));
+            }
+
+            if(data.hasExtra("symtom")){
+                symptom = data.getStringExtra("symptom");
+            }
+
+            this.setTitle(symptom);
+
+            Intent refresh = new Intent(this, SymptomDetailsActivity.class);
+            refresh.putExtra(Intent.EXTRA_TEXT, String.valueOf(symptomID));
+            refresh.putExtra("symptom", symptom);
+            startActivity(refresh);
+            this.finish();
+        }
+    }
 
     private Cursor getSymptom() {
         return mDb.query(
@@ -103,4 +130,38 @@ public class SymptomDetailsActivity extends AppCompatActivity {
     }
 
 
+    private void showPopup() {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(SymptomDetailsActivity.this, R.style.MyDialogTheme);
+        } else {
+            builder = new AlertDialog.Builder(SymptomDetailsActivity.this);
+        }
+        builder.setTitle(R.string.delete_symptom)
+                .setMessage(R.string.delete_symptom_text)
+                .setPositiveButton(R.string.accept_delete, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        deleteSymptom();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(R.mipmap.heartbeat)
+                .show();
+    }
+
+    public void deleteSymptom() {
+
+        String whereClause = MedicContract.SymptomEntry._ID + " = " + symptomID;
+
+        mDb.delete(MedicContract.SymptomEntry.TABLE_NAME, whereClause ,null);
+
+
+        Toast.makeText(getBaseContext(),"El síntoma se ha eliminado",  Toast.LENGTH_LONG).show();
+        finish();
+    }
 }
