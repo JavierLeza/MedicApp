@@ -84,6 +84,33 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
         );
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
+        MenuInflater inflater = getMenuInflater();
+        /* Use the inflater's inflate method to inflate our menu layout to this menu */
+        inflater.inflate(R.menu.menu_user_my_account, menu);
+        /* Return true so that the menu is displayed in the Toolbar */
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int userID = id;
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.action_my_account:
+                Intent intent = new Intent(this, UserAccountActivity.class);
+                startActivity(intent);
+                return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     @Override

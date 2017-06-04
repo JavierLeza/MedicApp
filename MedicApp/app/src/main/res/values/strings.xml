@@ -65,4 +65,10 @@
     <string name="accept_delete">Borrar</string>
     <string name="show_symptom">Síntoma:</string>
     <string name="new_symptom_name">Cambiar síntoma...</string>
+    <string name="my_account">Mi cuenta</string>
+    <string name="title_activity_user_account">UserAccountActivity</string>
+    <string name="user">Usuario</string>
+    <string name="patient_number">Número de pacientes: </string>
+    <string name="symptom_number">Número de síntomas activos: </string>
+    <string name="member_since">Miembro desde: </string>
 </resources>
