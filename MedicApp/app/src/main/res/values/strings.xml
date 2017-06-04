@@ -24,4 +24,16 @@
     <string name="add_patient_error">Debe rellenar todos los campos marcados con *</string>
     <string name="title_activity_patient_symptoms">PatientSymptomsActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="add_symptom">Síntoma *</string>
+    <string name="high_priority">ALTA</string>
+    <string name="med_priority">MEDIA</string>
+    <string name="low_priority">BAJA</string>
+    <string name="add_description">Descripción</string>
+    <string name="add_insert_description">Añade una descripción...</string>
+    <string name="add_symptom_button">AÑADIR SÍNTOMA</string>
+    <string name="add_list_priority">Gravedad *</string>
+    <string name="add_list_state">Estado *</string>
+    <string name="state_active">Activo</string>
+    <string name="state_inactive">No activo</string>
+    <string name="add_symptom_error">El síntoma ya exise</string>
 </resources>

@@ -93,7 +93,7 @@ public class AddPatientActivity extends AppCompatActivity {
 
 
 
-        //Se acaba la actividad y volvemos a la pantalla "mis listas"
+        //Se acaba la actividad y volvemos a la pantalla anterior
         finish();
     }
 

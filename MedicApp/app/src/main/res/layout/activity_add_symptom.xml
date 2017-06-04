@@ -1,9 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.medic.medicapp.AddSymptomActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.medic.medicapp.AddSymptomActivity"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_symptom"
+        android:hint="@string/add_symptom"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:textColor="@android:color/primary_text_light"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:text="@string/add_list_state"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinner_state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:textColor="@android:color/primary_text_light"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:text="@string/add_list_priority"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!--Gravedad del síntoma-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+        <!-- Todas las prioridades posibles -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:weightSum="3">
+
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
+                android:textColor="@android:color/primary_text_light"
+                android:id="@+id/buttonP1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/materialRed"
+                android:text="@string/high_priority"
+                android:layout_weight="1"
+                android:onClick="onPrioritySelected"/>
+
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
+                android:textColor="@android:color/primary_text_light"
+                android:id="@+id/buttonP2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/materialOrange"
+                android:text="@string/med_priority"
+                android:layout_weight="1"
+                android:onClick="onPrioritySelected"/>
+
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
+                android:textColor="@android:color/primary_text_light"
+                android:id="@+id/buttonP3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/materialYellow"
+                android:text="@string/low_priority"
+                android:layout_weight="1"
+                android:onClick="onPrioritySelected"/>
+
+        </LinearLayout>
+
+        <!-- RadioGroup for visible selection of a priority -->
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:weightSum="3">
+
+            <RadioButton
+                android:id="@+id/radButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onPrioritySelected"
+                android:layout_weight="1"
+                android:theme="@style/WhiteRadioButton"/>
+
+            <RadioButton
+                android:id="@+id/radButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onPrioritySelected"
+                android:layout_weight="1"
+                android:theme="@style/WhiteRadioButton"/>
+
+            <RadioButton
+                android:id="@+id/radButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onPrioritySelected"
+                android:layout_weight="1"
+                android:theme="@style/WhiteRadioButton"/>
+
+        </RadioGroup>
+
+    </FrameLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:textColor="@android:color/primary_text_light"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:text="@string/add_description"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_description"
+        android:hint="@string/add_insert_description"/>
+
+
+    <Button
+        android:id="@+id/b_add_elem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_symptom_button"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/primary_text_dark"
+        android:background="@color/colorPrimary"
+        android:onClick="onClickAddSymptom"
+        android:layout_gravity="center" />
+
+
+</LinearLayout>
