@@ -247,7 +247,36 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
     }
 
     public void symptomDetail (View view){
-        //TODO:
+        TextView tv = (TextView) view;
+
+        String symptom = tv.getText().toString();
+        int symptomId = getSymtomId(symptom);
+
+        Toast.makeText(getBaseContext(),"Se ha pulsado un síntoma:" + symptom, Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(PatientSymptomsActivity.this, SymptomDetailsActivity.class);
+
+        intent.putExtra(Intent.EXTRA_TEXT, String.valueOf(symptomId));
+        intent.putExtra("symptomId", symptomId);
+
+        // Se inicia la pantalla del detalle de los elementos
+        startActivity(intent);
+    }
+
+    private int getSymtomId(String symptom) {
+        Cursor cursor = mDb.query(
+                MedicContract.SymptomEntry.TABLE_NAME,
+                null,
+                MedicContract.SymptomEntry.COLUMN_SYMPTOM + " = '" + symptom + "' AND "
+                        + MedicContract.SymptomEntry.COLUMN_PATIENT + " = '" + patientDni + "' AND "
+                        + MedicContract.SymptomEntry.COLUMN_USER + " = " + id,
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+        return cursor.getInt(cursor.getColumnIndex(MedicContract.SymptomEntry._ID));
     }
 
 
