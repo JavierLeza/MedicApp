@@ -54,7 +54,7 @@
 
     <!-- Este es el botón con el que se añaden nuevos sintomas-->
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_new_elem"
+        android:id="@+id/fab_new_symtpm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

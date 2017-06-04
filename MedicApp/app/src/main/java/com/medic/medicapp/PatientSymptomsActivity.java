@@ -31,7 +31,7 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
 
 
     private String patientDni;
-    //TODO private SymptomAdapter mAdapter;
+    private SymptomAdapter mAdapter;
     RecyclerView mRecyclerView;
 
 
@@ -78,15 +78,14 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
         });
 
         //Añadir nuevo elemento
-        FloatingActionButton fab_new_elem = (FloatingActionButton) findViewById(R.id.fab_new_elem);
-        fab_new_elem.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab_new_symptom = (FloatingActionButton) findViewById(R.id.fab_new_symtpm);
+        fab_new_symptom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Al hacer click podemos añadir un nuevo síntoma
-//                // TODO: 03/06/2017
-//                Intent addElemIntent = new Intent(PatientSymptomsActivity.this, AddSymptomActivity.class);
-//                addElemIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(patientDni));
-//                startActivity(addElemIntent);
+                Intent addSymtomIntent = new Intent(PatientSymptomsActivity.this, AddSymptomActivity.class);
+                addSymtomIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(patientDni));
+                startActivity(addSymtomIntent);
             }
         });
 
@@ -94,9 +93,8 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Cursor cursor = getSymptoms();
-//        //TODO
-//        mAdapter = newSymptomAdapter(this, cursor);
-//        mRecyclerView.setAdapter(mAdapter);
+        mAdapter = new SymptomAdapter(this, cursor);
+        mRecyclerView.setAdapter(mAdapter);
 
 
         getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
@@ -127,14 +125,14 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
 
         return new AsyncTaskLoader<Cursor>(this) {
 
-            Cursor mElemData = null;
+            Cursor mSymptomData = null;
 
             // onStartLoading() is called when a loader first starts loading data
             @Override
             protected void onStartLoading() {
-                if (mElemData != null) {
+                if (mSymptomData != null) {
                     // Delivers any previously loaded data immediately
-                    deliverResult(mElemData);
+                    deliverResult(mSymptomData);
                 } else {
                     // Force a new load
                     forceLoad();
@@ -161,7 +159,7 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
 
             // deliverResult sends the result of the load, a Cursor, to the registered listener
             public void deliverResult(Cursor data) {
-                mElemData = data;
+                mSymptomData = data;
                 super.deliverResult(data);
             }
         };
@@ -171,13 +169,13 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Update the data that the adapter uses to create ViewHolders
-        //TODO:mAdapter.swapCursor(data);
+        mAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
-        //TODO:mAdapter.swapCursor(null);
+        mAdapter.swapCursor(null);
     }
 
     @Override
@@ -213,7 +211,7 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
         //// TODO: 03/06/2017
     }
 
-    public void elementDetail (View view){
+    public void symptomDetail (View view){
         //TODO:
     }
 
