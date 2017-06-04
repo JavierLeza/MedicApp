@@ -63,4 +63,6 @@
     <string name="delete_symptom">Borrar síntoma</string>
     <string name="delete_symptom_text">¿Estás seguro de que quieres eliminar este síntoma?</string>
     <string name="accept_delete">Borrar</string>
+    <string name="show_symptom">Síntoma:</string>
+    <string name="new_symptom_name">Cambiar síntoma...</string>
 </resources>

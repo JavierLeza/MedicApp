@@ -29,7 +29,8 @@
         <activity
             android:name=".SymptomDetailsActivity"
             android:label="@string/title_activity_symptom_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EditSymptomActivity"></activity>
     </application>
 
 </manifest>

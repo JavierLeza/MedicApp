@@ -41,11 +41,17 @@ public class SymptomDetailsActivity extends AppCompatActivity {
             symptom = intentThatStartedThisActivity.getStringExtra("symptom");
         }
 
+
+
         FloatingActionButton fab_edit = (FloatingActionButton) findViewById(R.id.fab_edit);
         fab_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                Intent intent = new Intent(SymptomDetailsActivity.this, EditSymptomActivity.class);
+
+                intent.putExtra(Intent.EXTRA_TEXT, String.valueOf(symptomID));
+
+                startActivityForResult(intent, 1);
 
             }
 
@@ -104,7 +110,7 @@ public class SymptomDetailsActivity extends AppCompatActivity {
                 symptomID = Integer.parseInt(data.getStringExtra(Intent.EXTRA_TEXT));
             }
 
-            if(data.hasExtra("symtom")){
+            if(data.hasExtra("symptom")){
                 symptom = data.getStringExtra("symptom");
             }
 
