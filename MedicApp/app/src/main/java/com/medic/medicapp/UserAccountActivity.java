@@ -41,11 +41,11 @@ public class UserAccountActivity extends AppCompatActivity {
         fab_edit_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                TODO Intent intent = new Intent(UserAccountActivity.this, ChangeMyAccountInfoActivity.class);
-//
-//                intent.putExtra(Intent.EXTRA_TEXT, userName);
-//
-//                startActivityForResult(intent, 1);
+                Intent intent = new Intent(UserAccountActivity.this, ChangeMyAccountInfoActivity.class);
+
+                intent.putExtra(Intent.EXTRA_TEXT, userName);
+
+                startActivityForResult(intent, 1);
             }
 
 
@@ -170,5 +170,24 @@ public class UserAccountActivity extends AppCompatActivity {
 
         Toast.makeText(getBaseContext(),"El usuario \"" + userName + "\" ha sido borrado con éxito.",  Toast.LENGTH_LONG).show();
         startActivity(new Intent(UserAccountActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+
+
+            if(data.hasExtra(Intent.EXTRA_TEXT)){
+                userName = data.getStringExtra(Intent.EXTRA_TEXT);
+            }
+
+            this.setTitle(userName);
+
+            Intent refresh = new Intent(this,UserAccountActivity.class);
+            refresh.putExtra(Intent.EXTRA_TEXT, userName);
+            startActivity(refresh);
+            this.finish();
+        }
     }
 }
