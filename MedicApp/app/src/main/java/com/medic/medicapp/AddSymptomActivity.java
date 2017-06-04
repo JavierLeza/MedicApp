@@ -22,7 +22,7 @@ import static com.medic.medicapp.MainActivity.mDb;
 public class AddSymptomActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private int mPriority = 0;
-    private boolean mState = false;
+    private int mState = 1;
     private String patientDni;
 
     @Override
@@ -34,6 +34,7 @@ public class AddSymptomActivity extends AppCompatActivity implements AdapterView
         Spinner dropdown = (Spinner) findViewById(R.id.spinner_state);
         String[] items = new String[]{getResources().getString(R.string.state_active), getResources().getString(R.string.state_inactive)};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setOnItemSelectedListener(this);
         dropdown.setAdapter(adapter);
 
         Intent intentThatStartedThisActivity = getIntent();
@@ -108,17 +109,17 @@ public class AddSymptomActivity extends AppCompatActivity implements AdapterView
 
         switch (position) {
             case 0:
-                mState = true;
+                mState = 1; //ACTIVO
                 break;
             case 1:
-                mState = false;
+                mState = 0; //INACTIVO
                 break;
         }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        mState = true;
+        mState = 1;
     }
 
     //Para seleccionar la gravedad/prioridad del síntoma

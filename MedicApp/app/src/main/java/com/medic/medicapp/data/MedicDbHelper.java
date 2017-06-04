@@ -11,7 +11,7 @@ public class MedicDbHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME = "medic.db";
 
     //Versión de la BD.
-    static final int DATABASE_VERSION = 6;
+    static final int DATABASE_VERSION = 7;
 
     public MedicDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -97,7 +97,7 @@ public class MedicDbHelper extends SQLiteOpenHelper {
                 + MedicContract.SymptomEntry.TABLE_NAME + " ("
                 + MedicContract.SymptomEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + MedicContract.SymptomEntry.COLUMN_SYMPTOM + " TEXT NOT NULL , "
-                + MedicContract.SymptomEntry.COLUMN_STATE + " BOOLEAN NOT NULL DEFAULT TRUE, "
+                + MedicContract.SymptomEntry.COLUMN_STATE + " INTEGER NOT NULL , "
                 + MedicContract.SymptomEntry.COLUMN_PRIORITY + " TEXT, "
                 + MedicContract.SymptomEntry.COLUMN_PATIENT + " TEXT NOT NULL, " //DNI del paciente
                 + MedicContract.SymptomEntry.COLUMN_USER + " INTEGER NOT NULL,"

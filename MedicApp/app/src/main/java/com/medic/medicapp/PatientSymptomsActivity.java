@@ -257,7 +257,7 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
         Intent intent = new Intent(PatientSymptomsActivity.this, SymptomDetailsActivity.class);
 
         intent.putExtra(Intent.EXTRA_TEXT, String.valueOf(symptomId));
-        intent.putExtra("symptomId", symptomId);
+        intent.putExtra("symptom", symptom);
 
         // Se inicia la pantalla del detalle de los elementos
         startActivity(intent);
