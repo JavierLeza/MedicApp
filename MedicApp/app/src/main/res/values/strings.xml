@@ -53,4 +53,8 @@
     <string name="pacient_admission_date">Fecha de ingreso:</string>
     <string name="edit_admission_date">Nueva fecha de ingreso</string>
     <string name="save_changes">GUARDAR CAMBIOS</string>
+    <string name="discharge_patient">Dar de alta al paciente</string>
+    <string name="discharge_patient_description">¿Está seguro de que quiere dar de alta al paciente?. Si acepta, el paciente dejará de aparecer en su lista de pacientes y perderá todos los síntomas que haya añadido.</string>
+    <string name="accept_discharge">Dar de alta</string>
+    <string name="cancel">CANCELAR</string>
 </resources>

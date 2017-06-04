@@ -35,7 +35,7 @@
     <include layout="@layout/content_patient_symptoms" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_delete"
+        android:id="@+id/fab_discharge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"

@@ -1,14 +1,17 @@
 package com.medic.medicapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +21,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,11 +72,12 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
 
         });
 
-        FloatingActionButton fab_delete_user = (FloatingActionButton) findViewById(R.id.fab_delete);
-        fab_delete_user.setOnClickListener(new View.OnClickListener() {
+        //Botón para dar de alta al paciente
+        FloatingActionButton fab_discharge_user = (FloatingActionButton) findViewById(R.id.fab_discharge);
+        fab_discharge_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: showPopup();
+                showPopup();
             }
         });
 
@@ -196,18 +201,49 @@ public class PatientSymptomsActivity extends AppCompatActivity implements Loader
         }
     }
 
-    private PopupWindow pw;
     private void showPopup() {
-        //TODO
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(PatientSymptomsActivity.this, R.style.MyDialogTheme);
+        } else {
+            builder = new AlertDialog.Builder(PatientSymptomsActivity.this);
+        }
+        builder.setTitle(R.string.discharge_patient)
+                .setMessage(R.string.discharge_patient_description)
+                .setPositiveButton(R.string.accept_discharge, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with discharge
+                        dischargeUser();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(R.mipmap.heartbeat)
+                .show();
     }
 
-    public void cancel(View view) {
-        pw.dismiss();
-    }
 
-    public void deleteUser(View view) {
 
-        //// TODO: 03/06/2017
+    public void dischargeUser() {
+        String whereClauseSymptoms =
+                MedicContract.SymptomEntry.COLUMN_PATIENT + " = '" + patientDni + "' AND "
+                        + MedicContract.SymptomEntry.COLUMN_USER + " = '" + id + "'";
+
+        String whereClausePatientUser =
+                MedicContract.PatientUserEntry.COLUMN_PATIENT_DNI + " = '" + patientDni + "' AND "
+                        + MedicContract.PatientUserEntry.COLUMN_USER_ID + " = '" + id + "'";
+
+        //Primero se borran los síntomas
+        mDb.delete(MedicContract.SymptomEntry.TABLE_NAME, whereClauseSymptoms ,null);
+
+        //Luego la lista
+        mDb.delete(MedicContract.PatientUserEntry.TABLE_NAME, whereClausePatientUser ,null);
+
+        Toast.makeText(getBaseContext(),"El paciente ha sido dado de alta",  Toast.LENGTH_LONG).show();
+        finish();
     }
 
     public void symptomDetail (View view){
