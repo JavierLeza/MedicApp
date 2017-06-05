@@ -185,14 +185,12 @@ public class AdminListActivity extends AppCompatActivity implements LoaderManage
 
         Toast.makeText(getBaseContext(),"Se ha pulsado un usuario:" + userName, Toast.LENGTH_LONG).show();
 
-        ///////Intent intent = new Intent(AdminListActivity.this,AdminDetailActivity.class);
+        Intent intent = new Intent(AdminListActivity.this,AdminDetailActivity.class);
 
-        //int id = getUserId(userName);
-
-        /////intent.putExtra(Intent.EXTRA_TEXT, userName);
+        intent.putExtra(Intent.EXTRA_TEXT, userName);
 
         // Se inicia la pantalla del detalle de la lista junto con sus elementos
-        /////startActivity(intent);
+        startActivity(intent);
     }
 
 

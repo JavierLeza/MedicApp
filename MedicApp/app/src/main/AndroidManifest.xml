@@ -47,7 +47,11 @@
         <activity android:name=".AdminListActivity" />
         <activity android:name=".LogActivity" />
         <activity android:name=".AdminAccountActivity" />
-        <activity android:name=".AddAdminActivity"></activity>
+        <activity android:name=".AddAdminActivity" />
+        <activity
+            android:name=".AdminDetailActivity"
+            android:label="@string/title_activity_admin_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
