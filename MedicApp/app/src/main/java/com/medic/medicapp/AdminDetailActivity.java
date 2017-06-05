@@ -56,18 +56,31 @@ public class AdminDetailActivity extends AppCompatActivity {
         String day = memberSince.substring(8);
         memberSince = day + " - " + month + " - " + year;
 
-        TextView mAdcionsNumberTextView = (TextView) findViewById(R.id.action_admins);
+        TextView mActionsNumberTextView = (TextView) findViewById(R.id.action_admins);
         TextView mMemberSince = (TextView) findViewById(R.id.member_since);
 
-        mAdcionsNumberTextView.setText(String.valueOf(actionsNumber));
+        mActionsNumberTextView.setText(String.valueOf(actionsNumber));
         mMemberSince.setText(memberSince);
     }
 
     public Cursor getActionsNumber() {
+        Cursor cursor = mDb.query(
+                MedicContract.AdminEntry.TABLE_NAME,
+                null,
+                MedicContract.AdminEntry.COLUMN_ADMIN_NAME + "='" + userName + "'",
+                null,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+        int adminID = cursor.getInt(cursor.getColumnIndex(MedicContract.AdminEntry._ID));
+
         return mDb.query(
                 MedicContract.LogEntry.TABLE_NAME,
                 null,
-                MedicContract.LogEntry.COLUMN_ADMIN_ID + "='" + userName + "'",
+                MedicContract.LogEntry.COLUMN_ADMIN_ID + "='" + adminID + "'",
                 null,
                 null,
                 null,
