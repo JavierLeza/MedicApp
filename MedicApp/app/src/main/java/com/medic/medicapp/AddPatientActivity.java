@@ -1,6 +1,7 @@
 package com.medic.medicapp;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,11 +22,18 @@ import static com.medic.medicapp.MainActivity.mDb;
 public class AddPatientActivity extends AppCompatActivity {
 
     private String mSex = null;
+    private String patientDni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_patient);
+
+        Intent intentThatStartedThisActivity = getIntent();
+        if(intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)){
+            patientDni = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
+        }
+        ((EditText) findViewById(R.id.add_dni)).setText(patientDni);
     }
 
     //Este método se llama al pulsar el botón "AÑADIR"
@@ -86,7 +94,7 @@ public class AddPatientActivity extends AppCompatActivity {
         contentValues.put(MedicContract.PatientEntry.COLUMN_ADMISSION_DATE, admission);
         contentValues.put(MedicContract.PatientEntry.COLUMN_SOCIAL_NUMBER, ssNumber);
 
-         mDb.insert(MedicContract.PatientEntry.TABLE_NAME, null, contentValues);
+        mDb.insert(MedicContract.PatientEntry.TABLE_NAME, null, contentValues);
 
         //Añadir la relación entre médico y paciente
         contentValues = new ContentValues();
@@ -128,6 +136,6 @@ public class AddPatientActivity extends AppCompatActivity {
             mSex = "F"; //Sexo fememino
         } else if (((RadioButton) findViewById(R.id.radButton2)).isChecked()) {
             mSex = "M"; //Sexo masculino
-        } 
+        }
     }
 }
