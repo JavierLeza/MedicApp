@@ -1,11 +1,32 @@
 package com.medic.medicapp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 
-public class UsersListActivity extends AppCompatActivity {
+import com.medic.medicapp.data.MedicContract;
+
+import static com.medic.medicapp.MainActivity.mDb;
+
+public class UsersListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+    //Lista de usuarios que hay en el sistema
+    //Es lo primero que ve el administrador al acceder
+
+    private UserListAdapter mAdapter;
     public static String userName;
+    RecyclerView mRecyclerView;
+
+    // Constantes para logging y para referirse a un loader unico
+    private static final String TAG = UsersListActivity.class.getSimpleName();
+    private static final int TASK_LOADER_ID = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,5 +36,112 @@ public class UsersListActivity extends AppCompatActivity {
         if(intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
             userName = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
         }
+        mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerViewUsers);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+        Cursor cursor = getUsers();
+        mAdapter = new UserListAdapter(this, cursor);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+        getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
     }
+
+    private Cursor getUsers(){
+        return mDb.query(
+                MedicContract.UserEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                MedicContract.UserEntry.COLUMN_TIMESTAMP
+        );
+    }
+    //Este método se llama si esta actividad se pausa o se reinicia.
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
+
+        return new AsyncTaskLoader<Cursor>(this) {
+
+            Cursor mListData = null;
+
+            // onStartLoading() is called when a loader first starts loading data
+            @Override
+            protected void onStartLoading() {
+                if (mListData != null) {
+                    // Delivers any previously loaded data immediately
+                    deliverResult(mListData);
+                } else {
+                    // Force a new load
+                    forceLoad();
+                }
+            }
+
+            // loadInBackground() performs asynchronous loading of data
+            @Override
+            public Cursor loadInBackground() {
+                // Will implement to load data
+
+                // Query and load all task data in the background; sort by priority
+                // [Hint] use a try/catch block to catch any errors in loading data
+
+                try {
+                    return getUsers();
+
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to asynchronously load data.");
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            // deliverResult sends the result of the load, a Cursor, to the registered listener
+            public void deliverResult(Cursor data) {
+                mListData = data;
+                super.deliverResult(data);
+            }
+        };
+
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        // Update the data that the adapter uses to create ViewHolders
+        mAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+        mAdapter.swapCursor(null);
+    }
+
+    public void userDetail(View view) {
+        //TODO
+       /* TextView tv = (TextView) view;
+
+        String userName = tv.getText().toString();
+
+        Toast.makeText(getBaseContext(),"Se ha pulsado un usuario:" + userName, Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(UsersListActivity.this,UserDetailActivity.class);
+
+        //int id = getUserId(userName);
+
+        intent.putExtra(Intent.EXTRA_TEXT, userName);
+
+
+        startActivity(intent);
+        */
+    }
+
 }
