@@ -1,13 +1,17 @@
 package com.medic.medicapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medic.medicapp.data.MedicContract;
 
@@ -42,7 +46,7 @@ public class UserDetailActivity extends AppCompatActivity {
         fab_delete_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //////////showPopup();
+                showPopup();
             }
         });
         //Esto es para saber el nombre del usuario
@@ -126,18 +130,41 @@ public class UserDetailActivity extends AppCompatActivity {
     }
 
     private void showPopup() {
-
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(UserDetailActivity.this, R.style.MyDialogTheme);
+        } else {
+            builder = new AlertDialog.Builder(UserDetailActivity.this);
+        }
+        builder.setTitle(R.string.delete_account)
+                .setMessage(R.string.delete_account_text)
+                .setPositiveButton(R.string.accept_delete, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with discharge
+                        deleteUser();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(R.mipmap.heartbeat)
+                .show();
     }
-    public void deleteUser(View view) {
-/*
-        String whereClause = MedicContract.UserEntry._ID + " = " + userID;
+    public void deleteUser() {
+        String whereClausePatients = MedicContract.PatientUserEntry.COLUMN_USER_ID + " = " + userID;
+        mDb.delete(MedicContract.PatientUserEntry.TABLE_NAME, whereClausePatients ,null);
 
-        mDb.delete(MedicContract.UserEntry.TABLE_NAME, whereClause,null);
+        String whereClauseSymptom = MedicContract.SymptomEntry.COLUMN_USER + " = " + userID;
+        mDb.delete(MedicContract.SymptomEntry.TABLE_NAME, whereClauseSymptom ,null);
 
-        new LogEntry(id, userName).deleteUser();
-        Toast.makeText(getBaseContext(),"El usuario " + userName + " ha sido borrado con éxito",  Toast.LENGTH_LONG).show();
+        String whereClauseUser = MedicContract.UserEntry._ID + " = " + userID;
+        mDb.delete(MedicContract.UserEntry.TABLE_NAME, whereClauseUser ,null);
+
+
+        Toast.makeText(getBaseContext(),"El usuario \"" + userName + "\" ha sido borrado con éxito.",  Toast.LENGTH_LONG).show();
         finish();
-        */
     }
 
     @Override
