@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medic.medicapp.data.MedicContract;
 
@@ -126,8 +128,7 @@ public class UsersListActivity extends AppCompatActivity implements LoaderManage
     }
 
     public void userDetail(View view) {
-        //TODO
-       /* TextView tv = (TextView) view;
+        TextView tv = (TextView) view;
 
         String userName = tv.getText().toString();
 
@@ -141,7 +142,7 @@ public class UsersListActivity extends AppCompatActivity implements LoaderManage
 
 
         startActivity(intent);
-        */
+
     }
 
 }

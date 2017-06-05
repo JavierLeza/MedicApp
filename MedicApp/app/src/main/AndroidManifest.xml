@@ -38,7 +38,11 @@
             android:label="@string/title_activity_user_account"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ChangeMyAccountInfoActivity" />
-        <activity android:name=".UsersListActivity"></activity>
+        <activity android:name=".UsersListActivity" />
+        <activity
+            android:name=".UserDetailActivity"
+            android:label="@string/title_activity_user_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
