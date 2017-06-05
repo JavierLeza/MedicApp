@@ -80,4 +80,8 @@
     <string name="new_password">Nueva contraseña</string>
     <string name="repite_password">Repita la contraseña</string>
     <string name="title_activity_user_detail">UserDetailActivity</string>
+    <string name="menu_action_users">Usuarios</string>
+    <string name="menu_action_admins">Administradores</string>
+    <string name="menu_action_logs">Logs</string>
+    <string name="menu_action_my_account">Mi cuenta</string>
 </resources>

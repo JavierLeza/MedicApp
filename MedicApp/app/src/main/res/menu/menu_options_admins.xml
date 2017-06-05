@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".UsersListActivity">
+
+
+    <item
+        android:id="@+id/action_users"
+        android:title="@string/menu_action_users"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_admins"
+        android:title="@string/menu_action_admins"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_logs"
+        android:title="@string/menu_action_logs"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_my_account"
+        android:title="@string/menu_action_my_account"
+        app:showAsAction="never"/>
+
+</menu>

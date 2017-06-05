@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +52,41 @@ public class UsersListActivity extends AppCompatActivity implements LoaderManage
 
 
         getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
+        MenuInflater inflater = getMenuInflater();
+        /* Use the inflater's inflate method to inflate our menu layout to this menu */
+        inflater.inflate(R.menu.menu_options_admins, menu);
+        /* Return true so that the menu is displayed in the Toolbar */
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+/*
+        switch (id){
+            case R.id.action_admins:
+                startActivity(new Intent(this, AdminListActivity.class).putExtra(Intent.EXTRA_TEXT, userName));
+                return true;
+
+            case  R.id.action_logs:
+                startActivity(new Intent(this, LogActivity.class));
+                return true;
+
+            case  R.id.action_my_account:
+                startActivity(new Intent(this, AdminAccountActivity.class).putExtra(Intent.EXTRA_TEXT, userName));
+                return true;
+
+            case R.id.action_db_backup:
+                startActivity(new Intent(this, DbBackupActivity.class));
+                return true;
+        }
+*/
+        return super.onOptionsItemSelected(item);
     }
 
     private Cursor getUsers(){
@@ -135,8 +173,6 @@ public class UsersListActivity extends AppCompatActivity implements LoaderManage
         Toast.makeText(getBaseContext(),"Se ha pulsado un usuario:" + userName, Toast.LENGTH_LONG).show();
 
         Intent intent = new Intent(UsersListActivity.this,UserDetailActivity.class);
-
-        //int id = getUserId(userName);
 
         intent.putExtra(Intent.EXTRA_TEXT, userName);
 
