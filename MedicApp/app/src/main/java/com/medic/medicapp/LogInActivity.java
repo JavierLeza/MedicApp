@@ -56,12 +56,12 @@ public class LogInActivity extends AppCompatActivity {
             id = getAdminId(mUserNameEditText.getText().toString());
             //El primer parámetro es el context y el segundo la siguiente actividad que se abrirá
 
-            ///////////Intent intent = new Intent(LogInActivity.this,UsersListActivity.class);
+            Intent intent = new Intent(LogInActivity.this,UsersListActivity.class);
 
-            ////////intent.putExtra(Intent.EXTRA_TEXT, mUserNameEditText.getText().toString());
+            intent.putExtra(Intent.EXTRA_TEXT, mUserNameEditText.getText().toString());
 
             // Se inicia la pantalla de los usuarios
-            ////////startActivity(intent);
+            startActivity(intent);
 
         }else{
             Toast.makeText(getBaseContext(), R.string.login_error, Toast.LENGTH_LONG).show();
