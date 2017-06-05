@@ -79,4 +79,7 @@
     <string name="change_password">Cambiar contraseña</string>
     <string name="new_password">Nueva contraseña</string>
     <string name="repite_password">Repita la contraseña</string>
+    <string name="add_patient">Añadir Paciente</string>
+    <string name="add_dni_message">Introduzca el DNI del paciente.</string>
+
 </resources>

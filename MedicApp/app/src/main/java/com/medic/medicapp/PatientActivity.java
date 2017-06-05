@@ -1,13 +1,17 @@
 package com.medic.medicapp;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +36,8 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
     private PatientAdapter mAdapter;
     public static String userName;
     RecyclerView mRecyclerView;
+
+    private String patientDni = ""; //Para cuando se quiera añadir un nuevo paciente
 
     // Constantes para logging y para referirse a un loader unico
     private static final String TAG = PatientActivity.class.getSimpleName();
@@ -52,8 +59,50 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
             @Override
             public void onClick(View view) {
                 //Al hacer click podemos añadir un nuevo paciente
-                Intent addPatientIntent = new Intent(PatientActivity.this, AddPatientActivity.class);
-                startActivity(addPatientIntent);
+                //primero se comprueba con el dni si el paciente ya está en la bbdd para que no haya
+                //que volver a escribir todos sus datos
+
+                final EditText input = new EditText(PatientActivity.this);
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(PatientActivity.this, R.style.MyDialogTheme);
+                } else {
+                    builder = new AlertDialog.Builder(PatientActivity.this);
+                }
+                builder.setTitle(R.string.add_patient)
+                        .setMessage(R.string.add_dni_message)
+                        .setView(input)
+                        .setPositiveButton(R.string.accept_button, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                patientDni = input.getText().toString();
+                                if(patientExists(patientDni)){
+                                    if(medicHasPatient(patientDni)){
+                                        //Aquí comprobamos si el médico ya tiene al paciente en su lista y no hacemos nada
+                                        Toast.makeText(getBaseContext(),"El paciente ya está en su lista", Toast.LENGTH_LONG).show();
+                                    }else{
+                                        ContentValues contentValues = new ContentValues();
+                                        contentValues.put(MedicContract.PatientUserEntry.COLUMN_USER_ID, id);
+                                        contentValues.put(MedicContract.PatientUserEntry.COLUMN_PATIENT_DNI, patientDni);
+
+                                        mDb.insert(MedicContract.PatientUserEntry.TABLE_NAME, null, contentValues);
+                                       
+                                        startActivity(getIntent());
+                                        Toast.makeText(getBaseContext(),"Paciente añadido/a con éxito", Toast.LENGTH_LONG).show();
+                                    }
+                                }else{
+                                    Intent addPatientIntent = new Intent(PatientActivity.this, AddPatientActivity.class);
+                                    addPatientIntent.putExtra(Intent.EXTRA_TEXT, patientDni);
+                                    startActivity(addPatientIntent);
+                                }
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(R.mipmap.heartbeat)
+                        .show();
             }
         });
 
@@ -63,13 +112,44 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
 
 
         Cursor cursor = getUserPatients();
-        Toast.makeText(getBaseContext(), "numero de pacientes del medico: " + cursor.getCount(), Toast.LENGTH_LONG).show();
 
         mAdapter = new PatientAdapter(this, cursor);
         mRecyclerView.setAdapter(mAdapter);
 
 
         getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
+    }
+
+
+    private boolean medicHasPatient(String patientDni) {
+        Cursor cursor = mDb.query(
+                MedicContract.PatientUserEntry.TABLE_NAME,
+                null,
+                MedicContract.PatientUserEntry.COLUMN_PATIENT_DNI+ " = '" + patientDni + "' AND "
+                        +  MedicContract.PatientUserEntry.COLUMN_USER_ID+ " = " + id ,
+                null,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+        return cursor.getCount()>0;
+    }
+
+    private boolean patientExists(String patientDni) {
+        Cursor cursor = mDb.query(
+                MedicContract.PatientEntry.TABLE_NAME,
+                null,
+                MedicContract.PatientEntry.COLUMN_DNI+ " = '" + patientDni + "'",
+                null,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+        return cursor.getCount()>0; //Si ya existe devuelve true
     }
 
     private Cursor getUserPatients(){
