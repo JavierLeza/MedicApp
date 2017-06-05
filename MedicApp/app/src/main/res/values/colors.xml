@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#33bbff</color>
-    <color name="colorPrimaryDark">#00aaff</color>
+    <color name="colorPrimary">#40c4db</color>
+    <color name="colorPrimaryDark">#39b4c9</color>
     <color name="colorAccent">#FF4081</color>
 
     <!-- Colores para la gravedad -->
@@ -12,4 +12,15 @@
     <!-- Colores para el sexo del paciente -->
     <color name="female">#FFC0CB</color>
     <color name="male">#37a2b2</color>
+
+
+    <color name="black">#000000</color>
+    <color name="jet">#222222</color>
+    <color name="oil">#333333</color>
+    <color name="monsoon">#777777</color>
+    <color name="jumbo">#888888</color>
+    <color name="aluminum">#999999</color>
+    <color name="base">#AAAAAA</color>
+    <color name="iron">#CCCCCC</color>
+    <color name="white">#FFFFFF</color>
 </resources>
