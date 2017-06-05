@@ -43,7 +43,11 @@
             android:name=".UserDetailActivity"
             android:label="@string/title_activity_user_detail"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ChangeUserNameActivity"></activity>
+        <activity android:name=".ChangeUserNameActivity" />
+        <activity android:name=".AdminListActivity" />
+        <activity android:name=".LogActivity" />
+        <activity android:name=".AdminAccountActivity" />
+        <activity android:name=".AddAdminActivity"></activity>
     </application>
 
 </manifest>
