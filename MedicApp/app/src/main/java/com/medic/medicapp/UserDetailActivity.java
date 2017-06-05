@@ -33,11 +33,11 @@ public class UserDetailActivity extends AppCompatActivity {
         fab_edit_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               //////// Intent intent = new Intent(UserDetailActivity.this, ChangeUserNameActivity.class);
+                Intent intent = new Intent(UserDetailActivity.this, ChangeUserNameActivity.class);
 
-               ///// intent.putExtra(Intent.EXTRA_TEXT, userName);
+                intent.putExtra(Intent.EXTRA_TEXT, userName);
 
-              //////  startActivityForResult(intent, 1);
+                startActivityForResult(intent, 1);
             }
 
 
