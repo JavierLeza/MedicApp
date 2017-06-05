@@ -80,5 +80,7 @@ public class MedicContract {
         public static final String COLUMN_SYMPTOM_ID = "symptomID";
         public static final String COLUMN_TIMESTAMP = "timestamp";
         public static final String COLUMN_DESCRIPTION = "description";
+
+
     }
 }
