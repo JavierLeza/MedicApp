@@ -20,7 +20,7 @@
             android:layout_weight="3"
             android:text="@string/description"
             android:textColor="@android:color/primary_text_light"
-            style="@style/TextAppearance.AppCompat.Medium"
+            style="@style/TextAppearance.AppCompat.Large"
             android:padding="16dp" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:layout_weight="1"
             android:text="@string/timestamp"
             android:textColor="@android:color/primary_text_light"
-            style="@style/TextAppearance.AppCompat.Medium"
+            style="@style/TextAppearance.AppCompat.Large"
             android:padding="16dp"/>
 
     </TableRow>
@@ -42,7 +42,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="@color/colorPrimary"/>
 
     <!-- RecyclerView es el que muestra la lista de usuarios -->
     <android.support.v7.widget.RecyclerView
