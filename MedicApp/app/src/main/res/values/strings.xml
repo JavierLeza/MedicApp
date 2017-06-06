@@ -74,7 +74,7 @@
     <string name="delete_account">Borrar mi cuenta</string>
     <string name="delete_account_text">¿Está seguro de que quiere borrar su cuenta? Se perderá toda la información que haya guardado de sus pacientes. \nEsta acción no se puede deshacer.</string>
     <string name="user_name_text">Nombre de usuario</string>
-    <string name="new_user_name">Cambiar nombre de usuario</string>
+    <string name="new_user_name">Nuevo nombre de usuario</string>
     <string name="accept_button">ACEPTAR</string>
     <string name="change_password">Cambiar contraseña</string>
     <string name="new_password">Nueva contraseña</string>
