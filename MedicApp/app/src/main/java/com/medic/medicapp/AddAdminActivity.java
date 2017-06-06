@@ -27,7 +27,7 @@ public class AddAdminActivity extends AppCompatActivity {
         mNewPasswordEditText = (EditText) findViewById(R.id.et_user_password);
     }
 
-    //Este es el método que se llama al pulsar el botón de REGISTRARSE
+    //Este es el método que se llama al pulsar el botón de CREAR ADMIN
     public void addUser(View view) {
         if(mNewUserEditText.getText().length()==0 || mNewPasswordEditText.getText().length()==0){
             return;
@@ -36,14 +36,14 @@ public class AddAdminActivity extends AppCompatActivity {
         if(addNewUserToDB(mNewUserEditText.getText().toString(), mNewPasswordEditText.getText().toString())){
             new LogEntry(id, mNewUserEditText.getText().toString()).newAdmin();
             Toast.makeText(getBaseContext(), R.string.register_ok, Toast.LENGTH_LONG).show();
+            finish();
 
         }else{
             Toast.makeText(getBaseContext(), R.string.register_error, Toast.LENGTH_LONG).show();
             mNewPasswordEditText.getText().clear();
             mNewUserEditText.getText().clear();
+            return;
         }
-
-        finish();
     }
 
     //Este método añade al usuario a la BD
@@ -63,9 +63,18 @@ public class AddAdminActivity extends AppCompatActivity {
     }
 
     public boolean checkUserName(String userName){
-        Cursor cursor;
+        Cursor cursorUser;
+        cursorUser = mDb.query(
+                MedicContract.UserEntry.TABLE_NAME,
+                null,
+                MedicContract.UserEntry.COLUMN_USER_NAME + " = '" + userName + "'",
+                null,
+                null,
+                null,
+                null);
 
-        cursor = mDb.query(
+        Cursor cursorAdmin;
+        cursorAdmin = mDb.query(
                 MedicContract.AdminEntry.TABLE_NAME,
                 null,
                 MedicContract.AdminEntry.COLUMN_ADMIN_NAME + " = '" + userName + "'",
@@ -74,11 +83,10 @@ public class AddAdminActivity extends AppCompatActivity {
                 null,
                 null);
 
-        if(cursor.getCount() > 0){
+        if(cursorUser.getCount() > 0 || cursorAdmin.getCount() >0){
             return false;
         }else{
             return true;
         }
-
     }
 }

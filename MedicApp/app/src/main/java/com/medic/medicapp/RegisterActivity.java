@@ -99,7 +99,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     public boolean checkUserName(String userName){
         Cursor cursorUser;
-
         cursorUser = mDb.query(
                 MedicContract.UserEntry.TABLE_NAME,
                 null,
@@ -124,7 +123,6 @@ public class RegisterActivity extends AppCompatActivity {
         }else{
             return true;
         }
-
     }
 
     @Override
