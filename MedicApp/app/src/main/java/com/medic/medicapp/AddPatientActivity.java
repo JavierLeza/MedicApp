@@ -3,18 +3,18 @@ package com.medic.medicapp;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.medic.medicapp.data.MedicContract;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-
-import com.medic.medicapp.data.MedicContract;
 
 import static com.medic.medicapp.MainActivity.id;
 import static com.medic.medicapp.MainActivity.mDb;
@@ -38,7 +38,7 @@ public class AddPatientActivity extends AppCompatActivity {
 
     //Este método se llama al pulsar el botón "AÑADIR"
     public void onClickAddPatient(View view) {
-
+        int contador = 0;
         String name = ((EditText) findViewById(R.id.add_name)).getText().toString();
 
         String dni = ((EditText) findViewById(R.id.add_dni)).getText().toString();
@@ -57,31 +57,38 @@ public class AddPatientActivity extends AppCompatActivity {
         String admissionMonth = ((EditText) findViewById(R.id.add_month_admission)).getText().toString();
         String admissionYear = ((EditText) findViewById(R.id.add_year_admission)).getText().toString();
 
-        String admission;
-        if (admissionDay.length() == 0 || admissionMonth.length() == 0 || admissionYear.length() == 0) {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-            Date date = new Date();
-            admission = dateFormat.format(date);
-        }else{
-            admission = admissionYear + "-" + admissionMonth + "-" + admissionDay;
-        }
+        String admission="";
+        while(contador==0 || contador==1) {
+            if(contador==1){
+                return;
+            }
+            if (admissionDay.length() == 0 || admissionMonth.length() == 0 || admissionYear.length() == 0) {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                Date date = new Date();
+                admission = dateFormat.format(date);
+            } else {
+                admission = admissionYear + "-" + admissionMonth + "-" + admissionDay;
+            }
 
-        //Para comprobar que se introducen todos los campos
-        if (    name.length() == 0 ||
-                dni.length()== 0 ||
-                address.length() == 0 ||
-                ssNumber.length() == 0 ||
-                birthdateDay.length() == 0 ||
-                birthdateMonth.length() == 0 ||
-                birthdateYear.length() == 0 ||
-                mSex == null) {
-            Toast.makeText(getBaseContext(), R.string.add_patient_error, Toast.LENGTH_LONG).show();
-            return;
-        }
+            //Para comprobar que se introducen todos los campos
+            if (name.length() == 0 ||
+                    dni.length() == 0 ||
+                    address.length() == 0 ||
+                    ssNumber.length() == 0 ||
+                    birthdateDay.length() == 0 ||
+                    birthdateMonth.length() == 0 ||
+                    birthdateYear.length() == 0 ||
+                    mSex == null) {
+                Toast.makeText(getBaseContext(), R.string.add_patient_error, Toast.LENGTH_LONG).show();
+                contador=1;
+            }else{
+                contador=2;
+            }
 
-        //Para comprobar si el paciente ya existe en la base de datos
-        if(checkDni(dni)){
-            finish();
+            //Para comprobar si el paciente ya existe en la base de datos
+            if (checkDni(dni)) {
+                finish();
+            }
         }
 
 
