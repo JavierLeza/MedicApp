@@ -84,11 +84,10 @@ public class AddPatientActivity extends AppCompatActivity {
             }else{
                 contador=2;
             }
-
-            //Para comprobar si el paciente ya existe en la base de datos
-            if (checkDni(dni)) {
-                finish();
-            }
+        }
+        //Para comprobar si el paciente ya existe en la base de datos
+        if (checkDni(dni)) {
+            finish();
         }
 
 
