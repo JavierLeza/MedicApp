@@ -48,7 +48,11 @@ public class AdminAccountActivity extends AppCompatActivity {
         fab_edit_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                Intent intent = new Intent(AdminAccountActivity.this, ChangeMyAccountInfoActivity.class);
+
+                intent.putExtra(Intent.EXTRA_TEXT, userName);
+
+                startActivityForResult(intent, 1);
             }
 
 
