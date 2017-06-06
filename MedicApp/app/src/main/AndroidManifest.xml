@@ -18,43 +18,54 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PatientActivity" />
+        <activity android:name=".PatientActivity"
+            android:label="@string/title_activity_patient"/>
         <activity
             android:name=".LogInActivity"
             android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".RegisterActivity"
             android:theme="@style/AppTheme.Dark" />
-        <activity android:name=".AddPatientActivity" />
+        <activity android:name=".AddPatientActivity"
+            android:label="@string/title_activity_add_patient"/>
         <activity
             android:name=".PatientSymptomsActivity"
             android:label="@string/title_activity_patient_symptoms"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddSymptomActivity" />
-        <activity android:name=".EditPatientActivity" />
+        <activity android:name=".AddSymptomActivity"
+            android:label="@string/title_activity_add_symptom"/>
+        <activity android:name=".EditPatientActivity"
+            android:label="@string/title_activity_edit_patient"/>
         <activity
             android:name=".SymptomDetailsActivity"
             android:label="@string/title_activity_symptom_details"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EditSymptomActivity" />
+        <activity android:name=".EditSymptomActivity"
+            android:label="@string/title_activity_edit_symptom"/>
         <activity
             android:name=".UserAccountActivity"
             android:label="@string/title_activity_user_account"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ChangeMyAccountInfoActivity" />
-        <activity android:name=".UsersListActivity" />
+        <activity android:name=".ChangeMyAccountInfoActivity"
+            android:label="@string/title_activity_change_my_account_info"/>
+        <activity android:name=".UsersListActivity"
+            android:label="@string/users_list"/>
         <activity
             android:name=".UserDetailActivity"
             android:label="@string/title_activity_user_detail"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ChangeUserNameActivity" />
-        <activity android:name=".AdminListActivity" />
-        <activity android:name=".LogActivity" />
+        <activity android:name=".ChangeUserNameActivity"
+            android:label="@string/title_change_user_name"/>
+        <activity android:name=".AdminListActivity"
+            android:label="@string/title_activity_admin_list"/>
+        <activity android:name=".LogActivity"
+            android:label="@string/title_activity_log"/>
         <activity
             android:name=".AdminAccountActivity"
             android:label="@string/title_activity_admin_account"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddAdminActivity" />
+        <activity android:name=".AddAdminActivity"
+            android:label="@string/title_activity_add_admin"/>
         <activity
             android:name=".AdminDetailActivity"
             android:label="@string/title_activity_admin_detail"

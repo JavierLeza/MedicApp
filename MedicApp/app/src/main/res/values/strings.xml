@@ -95,4 +95,15 @@
     <string name="description">Descripción</string>
     <string name="timestamp">Timestamp</string>
     <string name="title_activity_admin_account">AdminAccountActivity</string>
+    <string name="users_list">Usuarios</string>
+    <string name="title_activity_patient">Mis pacientes</string>
+    <string name="title_activity_edit_patient">Editar paciente</string>
+    <string name="title_activity_add_symptom">Añadir síntoma</string>
+    <string name="title_activity_edit_symptom">Editar síntoma</string>
+    <string name="title_change_user_name">Cambiar el nombre de usuario</string>
+    <string name="title_activity_admin_list">Administradores</string>
+    <string name="title_activity_log">Log</string>
+    <string name="title_activity_add_patient">Añadir paciente</string>
+    <string name="title_activity_change_my_account_info">Cambiar mis datos</string>
+    <string name="title_activity_add_admin">Añadir administrador</string>
 </resources>

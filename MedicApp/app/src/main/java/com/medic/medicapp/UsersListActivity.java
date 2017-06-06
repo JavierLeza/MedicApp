@@ -44,8 +44,6 @@ public class UsersListActivity extends AppCompatActivity implements LoaderManage
         mRecyclerView = (RecyclerView) this.findViewById(R.id.recyclerViewUsers);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-
         Cursor cursor = getUsers();
         mAdapter = new UserListAdapter(this, cursor);
         mRecyclerView.setAdapter(mAdapter);
