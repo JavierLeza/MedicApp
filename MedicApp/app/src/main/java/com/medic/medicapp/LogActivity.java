@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.medic.medicapp.data.MedicContract;
 
+import static com.medic.medicapp.MainActivity.id;
 import static com.medic.medicapp.MainActivity.mDb;
 
 public class LogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -38,6 +39,7 @@ public class LogActivity extends AppCompatActivity implements LoaderManager.Load
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+        userName = getAdminName();
 
         Cursor cursor = getLogs();
         mAdapter = new LogAdapter(this, cursor);
@@ -45,6 +47,21 @@ public class LogActivity extends AppCompatActivity implements LoaderManager.Load
 
 
         getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
+    }
+
+    private String getAdminName() {
+        Cursor cursor = mDb.query(
+                MedicContract.AdminEntry.TABLE_NAME,
+                null,
+                MedicContract.AdminEntry._ID + " = " + id,
+                null,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+        return cursor.getString(cursor.getColumnIndex(MedicContract.AdminEntry.COLUMN_ADMIN_NAME));
     }
 
     @Override
@@ -64,7 +81,7 @@ public class LogActivity extends AppCompatActivity implements LoaderManager.Load
 
         switch (id){
             case R.id.action_admins:
-                startActivity(new Intent(this, AdminListActivity.class).putExtra(Intent.EXTRA_TEXT, userName));
+                startActivity(new Intent(this, AdminListActivity.class).putExtra(Intent.EXTRA_TEXT, userName).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
                 return true;
 
             case  R.id.action_users:
@@ -72,7 +89,7 @@ public class LogActivity extends AppCompatActivity implements LoaderManager.Load
                 return true;
 
             case  R.id.action_my_account:
-                startActivity(new Intent(this, AdminAccountActivity.class).putExtra(Intent.EXTRA_TEXT, userName));
+                startActivity(new Intent(this, AdminAccountActivity.class).putExtra(Intent.EXTRA_TEXT, userName).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
                 return true;
         }
 
