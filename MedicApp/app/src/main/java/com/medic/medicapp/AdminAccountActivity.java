@@ -1,10 +1,13 @@
 package com.medic.medicapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -32,7 +35,11 @@ public class AdminAccountActivity extends AppCompatActivity {
         fab_delete_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                if(moreAdmins()){
+                    showPopup();
+                }else{
+                    Toast.makeText(getBaseContext(),"No se puede borrar el administrador porque es el único del sistema",  Toast.LENGTH_LONG).show();
+                }
 
             }
         });
@@ -71,6 +78,53 @@ public class AdminAccountActivity extends AppCompatActivity {
 
         mActionsNumberTextView.setText(String.valueOf(actionsNumber));
         mMemberSince.setText(memberSince);
+    }
+
+    private void showPopup() {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(AdminAccountActivity.this, R.style.MyDialogTheme);
+        } else {
+            builder = new AlertDialog.Builder(AdminAccountActivity.this);
+        }
+        builder.setTitle(R.string.delete_account)
+                .setMessage(R.string.delete_admin_text)
+                .setPositiveButton(R.string.accept_delete, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        deleteAccount();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(R.mipmap.heartbeat)
+                .show();
+    }
+
+    private void deleteAccount() {
+        String whereClause = MedicContract.AdminEntry._ID + " = " + id ;
+
+        mDb.delete(MedicContract.AdminEntry.TABLE_NAME, whereClause,null);
+        Toast.makeText(getBaseContext(),"El administrador \"" + userName + "\" ha sido borrado con éxito",  Toast.LENGTH_LONG).show();
+        startActivity(new Intent(AdminAccountActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
+    }
+
+    private boolean moreAdmins() {
+        Cursor cursor = mDb.query(
+                MedicContract.AdminEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        return cursor.getCount()>1; // Si es mayor que 1 devuelve true y si no, false
+
     }
 
     public Cursor getActionsNumber() {

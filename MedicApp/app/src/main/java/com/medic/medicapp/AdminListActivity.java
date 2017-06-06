@@ -86,15 +86,15 @@ public class AdminListActivity extends AppCompatActivity implements LoaderManage
 
         switch (id){
             case R.id.action_users:
-                startActivity(new Intent(this, UsersListActivity.class));
+                startActivity(new Intent(this, UsersListActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
                 return true;
 
             case  R.id.action_logs:
-                startActivity(new Intent(this, LogActivity.class));
+                startActivity(new Intent(this, LogActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
                 return true;
 
             case  R.id.action_my_account:
-                startActivity(new Intent(this, AdminAccountActivity.class).putExtra(Intent.EXTRA_TEXT, userName));
+                startActivity(new Intent(this, AdminAccountActivity.class).putExtra(Intent.EXTRA_TEXT, userName).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
                 return true;
         }
 

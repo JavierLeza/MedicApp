@@ -69,15 +69,15 @@ public class UsersListActivity extends AppCompatActivity implements LoaderManage
         int id = item.getItemId();
         switch (id){
             case R.id.action_admins:
-                startActivity(new Intent(this, AdminListActivity.class).putExtra(Intent.EXTRA_TEXT, userName));
+                startActivity(new Intent(this, AdminListActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ).putExtra(Intent.EXTRA_TEXT, userName));
                 return true;
 
             case  R.id.action_logs:
-                startActivity(new Intent(this, LogActivity.class));
+                startActivity(new Intent(this, LogActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
                 return true;
 
             case  R.id.action_my_account:
-                startActivity(new Intent(this, AdminAccountActivity.class).putExtra(Intent.EXTRA_TEXT, userName));
+                startActivity(new Intent(this, AdminAccountActivity.class).putExtra(Intent.EXTRA_TEXT, userName).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP ));
                 return true;
         }
         return super.onOptionsItemSelected(item);
