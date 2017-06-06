@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".PatientActivity" />
-        <activity android:name=".LogInActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LogInActivity" android:theme="@style/AppTheme.Dark"/>
+        <activity android:name=".RegisterActivity" android:theme="@style/AppTheme.Dark"/>
         <activity android:name=".AddPatientActivity" />
         <activity
             android:name=".PatientSymptomsActivity"
