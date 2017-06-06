@@ -179,4 +179,6 @@
     <string name="actions_number">Número de acciones</string>
     <string name="delete_admin_text">¿Está seguro de que quiere borrar esta cuenta de administrador? Esta acción no se puede deshacer</string>
     <string name="delete_admin_account">Borrar administrador</string>
+    <string name="description">Descripción</string>
+    <string name="timestamp">Timestamp</string>
 </resources>
