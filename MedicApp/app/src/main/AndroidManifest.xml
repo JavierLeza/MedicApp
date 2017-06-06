@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/heartbeat"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"  android:theme="@style/AppTheme.Dark">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.Dark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +37,21 @@
             android:name=".UserAccountActivity"
             android:label="@string/title_activity_user_account"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ChangeMyAccountInfoActivity"></activity>
+        <activity android:name=".ChangeMyAccountInfoActivity" />
+        <activity android:name=".UsersListActivity" />
+        <activity
+            android:name=".UserDetailActivity"
+            android:label="@string/title_activity_user_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ChangeUserNameActivity" />
+        <activity android:name=".AdminListActivity" />
+        <activity android:name=".LogActivity" />
+        <activity android:name=".AdminAccountActivity" />
+        <activity android:name=".AddAdminActivity" />
+        <activity
+            android:name=".AdminDetailActivity"
+            android:label="@string/title_activity_admin_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -81,5 +81,17 @@
     <string name="repite_password">Repita la contraseña</string>
     <string name="add_patient">Añadir Paciente</string>
     <string name="add_dni_message">Introduzca el DNI del paciente.</string>
-
+    <string name="title_activity_user_detail">UserDetailActivity</string>
+    <string name="menu_action_users">Usuarios</string>
+    <string name="menu_action_admins">Administradores</string>
+    <string name="menu_action_logs">Logs</string>
+    <string name="menu_action_my_account">Mi cuenta</string>
+    <string name="add_admin">Añadir Administrador</string>
+    <string name="title_activity_admin_detail">AdminDetailActivity</string>
+    <string name="admin">Administrador</string>
+    <string name="actions_number">Número de acciones</string>
+    <string name="delete_admin_text">¿Está seguro de que quiere borrar esta cuenta de administrador? Esta acción no se puede deshacer</string>
+    <string name="delete_admin_account">Borrar administrador</string>
+    <string name="description">Descripción</string>
+    <string name="timestamp">Timestamp</string>
 </resources>
