@@ -37,7 +37,7 @@ public class AdminDetailActivity extends AppCompatActivity {
             }
         });
 
-        //Esto es para saber el nombre del usuario
+        //Esto es para saber el nombre del admin
         Intent intentThatStartedThisActivity = getIntent();
         if(intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)){
             userName = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
@@ -56,7 +56,7 @@ public class AdminDetailActivity extends AppCompatActivity {
         String day = memberSince.substring(8);
         memberSince = day + " - " + month + " - " + year;
 
-        TextView mActionsNumberTextView = (TextView) findViewById(R.id.action_admins);
+        TextView mActionsNumberTextView = (TextView) findViewById(R.id.adm_actions_number);
         TextView mMemberSince = (TextView) findViewById(R.id.member_since);
 
         mActionsNumberTextView.setText(String.valueOf(actionsNumber));
@@ -107,8 +107,8 @@ public class AdminDetailActivity extends AppCompatActivity {
         } else {
             builder = new AlertDialog.Builder(AdminDetailActivity.this);
         }
-        builder.setTitle(R.string.delete_account)
-                .setMessage(R.string.delete_account_text)
+        builder.setTitle(R.string.delete_admin_account)
+                .setMessage(R.string.delete_admin_text)
                 .setPositiveButton(R.string.accept_delete, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with discharge
