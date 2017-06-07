@@ -106,7 +106,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/add_ssNumber"
-        android:hint="@string/add_ss_number"/>
+        android:hint="@string/add_ss_number"
+        android:inputType="number"/>
 
     <!--Address-->
     <EditText

@@ -79,17 +79,24 @@ public class AddPatientActivity extends AppCompatActivity {
                     birthdateMonth.length() == 0 ||
                     birthdateYear.length() == 0 ||
                     mSex == null) {
+
                 Toast.makeText(getBaseContext(), R.string.add_patient_error, Toast.LENGTH_LONG).show();
                 contador=1;
             }else{
-                contador=2;
-            }
 
-            //Para comprobar si el paciente ya existe en la base de datos
-            if (checkDni(dni)) {
-                finish();
+                if(ssNumberIsValid(ssNumber)){
+                    contador=2;
+                }else{
+                    Toast.makeText(getBaseContext(), R.string.ssNumer_not_valid, Toast.LENGTH_LONG).show();
+                    contador=1;
+                }
             }
         }
+        //Para comprobar si el paciente ya existe en la base de datos
+        if (checkDni(dni)) {
+            finish();
+        }
+
 
 
         ContentValues contentValues = new ContentValues();
@@ -116,6 +123,19 @@ public class AddPatientActivity extends AppCompatActivity {
 
         //Se acaba la actividad y volvemos a la pantalla anterior
         finish();
+    }
+
+    //deveulve true si el número es válido
+    private boolean ssNumberIsValid(String ssNumber) {
+        if(ssNumber.length()==10){
+            for(int i=0; i<ssNumber.length(); i++){
+                if(!Character.isDigit(ssNumber.charAt(i))){
+                   return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     private boolean checkDni(String dni) {

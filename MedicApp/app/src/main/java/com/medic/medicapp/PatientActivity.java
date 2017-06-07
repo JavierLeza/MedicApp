@@ -75,25 +75,31 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
                         .setPositiveButton(R.string.accept_button, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 patientDni = input.getText().toString();
-                                if(patientExists(patientDni)){
-                                    if(medicHasPatient(patientDni)){
-                                        //Aquí comprobamos si el médico ya tiene al paciente en su lista y no hacemos nada
-                                        Toast.makeText(getBaseContext(),"El paciente ya está en su lista", Toast.LENGTH_LONG).show();
-                                    }else{
-                                        ContentValues contentValues = new ContentValues();
-                                        contentValues.put(MedicContract.PatientUserEntry.COLUMN_USER_ID, id);
-                                        contentValues.put(MedicContract.PatientUserEntry.COLUMN_PATIENT_DNI, patientDni);
 
-                                        mDb.insert(MedicContract.PatientUserEntry.TABLE_NAME, null, contentValues);
-                                       
-                                        startActivity(getIntent());
-                                        Toast.makeText(getBaseContext(),"Paciente añadido/a con éxito", Toast.LENGTH_LONG).show();
+                                if(dniValid(patientDni)){
+                                    if(patientExists(patientDni)){
+                                        if(medicHasPatient(patientDni)){
+                                            //Aquí comprobamos si el médico ya tiene al paciente en su lista y no hacemos nada
+                                            Toast.makeText(getBaseContext(),"El paciente ya está en su lista", Toast.LENGTH_LONG).show();
+                                        }else{
+                                            ContentValues contentValues = new ContentValues();
+                                            contentValues.put(MedicContract.PatientUserEntry.COLUMN_USER_ID, id);
+                                            contentValues.put(MedicContract.PatientUserEntry.COLUMN_PATIENT_DNI, patientDni);
+
+                                            mDb.insert(MedicContract.PatientUserEntry.TABLE_NAME, null, contentValues);
+
+                                            startActivity(getIntent());
+                                            Toast.makeText(getBaseContext(),"Paciente añadido/a con éxito", Toast.LENGTH_LONG).show();
+                                        }
+                                    }else{
+                                        Intent addPatientIntent = new Intent(PatientActivity.this, AddPatientActivity.class);
+                                        addPatientIntent.putExtra(Intent.EXTRA_TEXT, patientDni);
+                                        startActivity(addPatientIntent);
                                     }
                                 }else{
-                                    Intent addPatientIntent = new Intent(PatientActivity.this, AddPatientActivity.class);
-                                    addPatientIntent.putExtra(Intent.EXTRA_TEXT, patientDni);
-                                    startActivity(addPatientIntent);
+                                    Toast.makeText(getBaseContext(),"El dni introducido no es válido", Toast.LENGTH_LONG).show();
                                 }
+
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -118,6 +124,25 @@ public class PatientActivity extends AppCompatActivity implements LoaderManager.
 
 
         getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
+    }
+
+    private boolean dniValid(String patientDni) {
+        if(patientDni.length() == 9){
+            for(int i  = 0; i<patientDni.length()-1; i++){
+                //Si los 8 primeros caracteres no son números devuelve false
+                if(!Character.isDigit(patientDni.charAt(i))){
+                    return false;
+                }
+            }
+
+            if(!Character.isLetter(patientDni.charAt(patientDni.length()-1))){
+                //Si el último caracter no es una letra devuelve false (dni no válido)
+                return false;
+            }else{
+                return true;
+            }
+        }
+        return false;
     }
 
 

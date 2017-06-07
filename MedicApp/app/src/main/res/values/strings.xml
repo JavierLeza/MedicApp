@@ -106,4 +106,5 @@
     <string name="title_activity_add_patient">Añadir paciente</string>
     <string name="title_activity_change_my_account_info">Cambiar mis datos</string>
     <string name="title_activity_add_admin">Añadir administrador</string>
+    <string name="ssNumer_not_valid">El número de la Seguridad Social no es válido.</string>
 </resources>
