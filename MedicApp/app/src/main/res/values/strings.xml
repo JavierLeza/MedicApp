@@ -95,4 +95,5 @@
     <string name="description">Descripción</string>
     <string name="timestamp">Timestamp</string>
     <string name="title_activity_admin_account">AdminAccountActivity</string>
+    <string name="ssNumer_not_valid">El número de la Seguridad Social no es válido.</string>
 </resources>
